@@ -22,8 +22,6 @@ import static android.content.ContentValues.TAG;
 
 public class DisplayMessageActivity extends AppCompatActivity {
 
-    private static final Gson gson = new GsonBuilder().create();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,20 +36,20 @@ public class DisplayMessageActivity extends AppCompatActivity {
         //The Retrofit builder will have the client attached, in order to get connection logs
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("http://ec2-52-53-243-46.us-west-1.compute.amazonaws.com")
+                .baseUrl("http://www.superultramegadeathagon.com")
                 .build();
         BucketListAPI service = retrofit.create(BucketListAPI.class);
 
-        Call<List<ServerResponse>> call = service.get();
-        call.enqueue(new Callback<List<ServerResponse>>() {
+        Call<ServerResponse> call = service.post(message);
+        call.enqueue(new Callback<ServerResponse>() {
             @Override
-            public void onResponse(Call<List<ServerResponse>> call, Response<List<ServerResponse>> response) {
+            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                 Log.e(TAG,"Success");
-                textView.setText(gson.toJson(response.body()));
+                textView.setText(MainActivity.gson.toJson(response.body()));
             }
 
             @Override
-            public void onFailure(Call<List<ServerResponse>> call, Throwable t) {
+            public void onFailure(Call<ServerResponse> call, Throwable t) {
                 // handle execution failures like no internet connectivity
                 Log.e(TAG,"Failure");
                 textView.setText(t.getMessage());

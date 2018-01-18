@@ -9,46 +9,21 @@ import java.io.Serializable;
  */
 
 class ServerResponse implements Serializable {
-    @SerializedName("task_id")
-    private int taskID;
-    @SerializedName("subject")
-    private String subject;
-    @SerializedName("start_date")
-    private String startDate;
-    @SerializedName("end_date")
-    private String endDate;
-    @SerializedName("description")
-    private String description;
+    @SerializedName("data")
+    private String data;
+    @SerializedName("status")
+    private String status;
 
-    public void setTaskID (int i) {
-        this.taskID = i;
+    public void setData (String s) {
+        this.data = s;
     }
-    public void setSubject (String s) {
-        this.subject = s;
+    public void setStatus (String s) {
+        this.status = s;
     }
-    public void setStatDate (String s) {
-        this.startDate = s;
+    public String getData () {
+        return this.data;
     }
-    public void setEndDate (String s) {
-        this.endDate = s;
-    }
-    public void setDescription (String s) {
-        this.description = s;
-    }
-
-    public int setTaskID () {
-        return this.taskID;
-    }
-    public String setSubject () {
-        return this.subject;
-    }
-    public String setStatDate () {
-        return this.startDate;
-    }
-    public String setEndDate () {
-        return this.endDate;
-    }
-    public String setDescription () {
-        return this.description;
+    public String getStatus() {
+        return this.status;
     }
 }
